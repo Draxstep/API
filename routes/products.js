@@ -1,59 +1,26 @@
 const express = require('express');
-const faker = require('faker');
+const productServices = require('../services/servicesProduct');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  const {size} = req.query;
-  const limit = size || 5;
-  const products = [];
-  for(let i = 0; i < limit; i++){
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl()
-    });
-  }
-
+  const products = productServices.getAllProducts(req, res);
   res.json(products);
 });
 
 router.post('/', (req, res) => {
-  const body = req.body;
-
-  res.json({
-    ok: true,
-    data: body
-  });
+  productServices.createNewProduct(req, res);
 });
 
 router.patch('/:id', (req, res) => {
-  const {id} = req.params;
-  const product = req.body;
-
-  res.json({
-    'state': true,
-    'id': id,
-    'product': product
-  });
+  productServices.updateProduct(req, res);
 });
 
 router.delete('/:id', (req, res) =>{
-  const {id} = req.params;
-
-  res.json({
-    'message': 'Eliminación exitosa.',
-    id
-  });
+  productServices.deleteProduct(req, res);
 });
 
 router.get('/:id', (req, res) =>{
-  const {id} = req.params;
-  res.json({
-    'id': id,
-    'name': 'Teclado',
-    'price': 2000,
-    'category': 'technology'
-  });
+  productServices.getProductById(req, res);
 });
 
 module.exports = router;

@@ -17,6 +17,35 @@ router.get('/', (req, res) => {
   res.json(products);
 });
 
+router.post('/', (req, res) => {
+  const body = req.body;
+
+  res.json({
+    ok: true,
+    data: body
+  });
+});
+
+router.patch('/:id', (req, res) => {
+  const {id} = req.params;
+  const product = req.body;
+
+  res.json({
+    'state': true,
+    'id': id,
+    'product': product
+  });
+});
+
+router.delete('/:id', (req, res) =>{
+  const {id} = req.params;
+
+  res.json({
+    'message': 'Eliminación exitosa.',
+    id
+  });
+});
+
 router.get('/:id', (req, res) =>{
   const {id} = req.params;
   res.json({

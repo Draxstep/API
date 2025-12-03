@@ -23,6 +23,9 @@ const getAllProducts = (req, res) => {
 const getProductById = (req, res) => {
   try {
     const {id} = req.params;
+    if(id != 1){
+      throw boom.notFound('Product not found!');
+    }
     res.json({
       'id': id,
       'name': 'Teclado',
@@ -37,6 +40,9 @@ const getProductById = (req, res) => {
 const createNewProduct = (req, res) => {
   try {
     const body = req.body;
+    if(body == null){
+      throw boom.badData('Body is null.');
+    }
     res.json({
       ok: true,
       data: body
@@ -49,7 +55,9 @@ const createNewProduct = (req, res) => {
 const deleteProduct = (req, res) => {
   try {
     const {id} = req.params;
-
+    if(id != 1){
+      throw boom.notFound('Product not found!');
+    }
     res.json({
       'message': 'Eliminación exitosa.',
       id

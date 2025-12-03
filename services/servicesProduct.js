@@ -2,55 +2,75 @@ const faker = require('faker');
 
 // eslint-disable-next-line no-unused-vars
 const getAllProducts = (req, res) => {
-  const {size} = req.query;
-  const limit = size || 5;
-  const products = [];
-  for(let i = 0; i < limit; i++){
-    products.push({
-      name: faker.commerce.productName(),
-      price: parseInt(faker.commerce.price(), 10),
-      image: faker.image.imageUrl()
-    });
+  try {
+    const {size} = req.query;
+    const limit = size || 5;
+    const products = [];
+    for(let i = 0; i < limit; i++){
+      products.push({
+        name: faker.commerce.productName(),
+        price: parseInt(faker.commerce.price(), 10),
+        image: faker.image.imageUrl()
+      });
+    }
+    return products;
+  } catch (error) {
+      console.log(error);
   }
-  return products;
 }
 
 const getProductById = (req, res) => {
-  const {id} = req.params;
-  res.json({
-    'id': id,
-    'name': 'Teclado',
-    'price': 2000,
-    'category': 'technology'
-  });
+  try {
+    const {id} = req.params;
+    res.json({
+      'id': id,
+      'name': 'Teclado',
+      'price': 2000,
+      'category': 'technology'
+    });
+  } catch (error) {
+      console.log(error);
+  }
 }
 
 const createNewProduct = (req, res) => {
-  const body = req.body;
-  res.json({
-    ok: true,
-    data: body
-  });
+  try {
+    const body = req.body;
+    res.json({
+      ok: true,
+      data: body
+    });
+  } catch (error) {
+      console.log(error);
+  }
 }
 
 const deleteProduct = (req, res) => {
-  const {id} = req.params;
+  try {
+    const {id} = req.params;
 
-  res.json({
-    'message': 'Eliminación exitosa.',
-    id
-  });
+    res.json({
+      'message': 'Eliminación exitosa.',
+      id
+    });
+  } catch (error) {
+      console.log(error);
+  }
 }
 
 const updateProduct = (req, res) => {
-  const {id} = req.params;
-  const product = req.body;
+  try {
+    const {id} = req.params;
+    const product = req.body;
 
-  res.json({
-    'state': true,
-    'id': id,
-    'product': product
-  });
+    res.json({
+      'state': true,
+      'id': id,
+      'product': product
+    });
+  } catch (error) {
+      console.log(error);
+  }
 }
 
 module.exports = {

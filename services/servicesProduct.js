@@ -1,9 +1,9 @@
 const faker = require('faker');
+const boom = require('@hapi/boom');
 
 // eslint-disable-next-line no-unused-vars
 const getAllProducts = (req, res) => {
   try {
-
     const {size} = req.query;
     const limit = size || 5;
     const products = [];
@@ -62,6 +62,9 @@ const deleteProduct = (req, res) => {
 const updateProduct = (req, res) => {
   try {
     const {id} = req.params;
+    if(id != 1){
+      throw boom.notFound('Product not found!');
+    }
     const product = req.body;
 
     res.json({

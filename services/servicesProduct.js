@@ -3,6 +3,7 @@ const faker = require('faker');
 // eslint-disable-next-line no-unused-vars
 const getAllProducts = (req, res) => {
   try {
+
     const {size} = req.query;
     const limit = size || 5;
     const products = [];
